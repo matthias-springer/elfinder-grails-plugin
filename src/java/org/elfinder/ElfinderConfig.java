@@ -1,5 +1,4 @@
-package my.demo;
-
+package org.elfinder;
 
 import java.io.File;
 
@@ -8,23 +7,20 @@ import org.elfinder.servlets.fs.DiskFsImpl;
 import org.elfinder.servlets.fs.IFsImpl;
 
 /**
- * @author Antoine Walter (www.anw.fr)
+ * @author Antoine Walter (www.anw.fr), Matthias Springer
  * @date 29 aug. 2011
  * @version $Id$
  * @license BSD
  */
 
-/**
- * Sample of custom connector configuration.
- */
-public class MyDemoConfig extends AbstractConnectorConfig {
+public class ElfinderConfig extends AbstractConnectorConfig {
 
 	/**
 	 * Filesystem.
 	 */
 	private DiskFsImpl fsImpl;
 
-	public MyDemoConfig() {
+	public ElfinderConfig() {
 		fsImpl = new DiskFsImpl();
 	}
 
@@ -35,27 +31,27 @@ public class MyDemoConfig extends AbstractConnectorConfig {
 
 	@Override
 	public String getRoot() {
-		return MyDemoServlet.HOME_SHARED_DOCS;
+		return ElfinderServlet.HOME_SHARED_DOCS;
 	}
 
 	@Override
 	public String getRootUrl() {
-		return MyDemoServlet.REALOBJECTURL;
+		return ElfinderServlet.REALOBJECTURL;
 	}
 	
 	@Override
 	public String getFileUrl(File path) {
-		return getRootUrl() + "/" + getRelativePath(path);
+		return getRootUrl() + "?p=" + getRelativePath(path);
 	}
 
 	@Override
 	public String rootAliasOrBaseName() {
-		return MyDemoServlet.SHARED_DOCS;
+		return ElfinderServlet.SHARED_DOCS;
 	}
 	
 	@Override
 	public String getThumbnailUrl(File path) {
-		return MyDemoServlet.THUMBNAIL + getRelativePath(path);
+		return ElfinderServlet.THUMBNAIL + getRelativePath(path);
 	}
 	
 	@Override

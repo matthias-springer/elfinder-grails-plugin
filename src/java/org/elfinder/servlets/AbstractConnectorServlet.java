@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -125,50 +126,54 @@ public abstract class AbstractConnectorServlet extends HttpServlet {
 				throw new Exception("Configuration problem");
 			}
 
-			// prepare command and run
-			AbstractCommand command = prepareCommand((String) requestParams.get("cmd"), request, response, config);
-			try {
-				command.execute();
-			} catch (ConnectorException e) {
-				logger.warn("command returned an error", e);
-				putResponse("error", e.getMessage());
-			}
+      try {
+    			// prepare command and run
+		    	AbstractCommand command = prepareCommand((String) requestParams.get("cmd"), request, response, config);
+          
+    			try {
+		    		command.execute();
+    			} catch (ConnectorException e) {
+		    		logger.warn("command returned an error", e);
+				    putResponse("error", e.getMessage());
+    			}
 
-			// append init info if needed
-			if (command.mustRunInit()) {
-				try {
-					command.initCommand();
-				} catch (ConnectorException e) {
-					logger.warn("command returned an error", e);
-					putResponse("error", e.getMessage());
-				}
-			}
+		    	// append init info if needed
+    			if (command.mustRunInit()) {
+		    		try {
+				    	command.initCommand();
+    				} catch (ConnectorException e) {
+		    			logger.warn("command returned an error", e);
+				    	putResponse("error", e.getMessage());
+    				}
+		    	}
 
-			// output if command didn't do it
-			if (!command.isResponseOutputDone()) {
-				output(response, command.isResponseTextHtml(), json, command.getResponseWriter());
-				command.setResponseOutputDone(true);
-			}
-		} catch (Exception e) {
-			logger.error("Unknown error", e);
-			putResponse("error", "Unknown error");
+    			// output if command didn't do it
+		    	if (!command.isResponseOutputDone()) {
+				    output(response, command.isResponseTextHtml(), json, command.getResponseWriter());
+    				command.setResponseOutputDone(true);
+		    	}
 
-			// output the error
-			try {
-				output(response, false, json, response.getWriter());
-			} catch (Exception ee) {
-				logger.error("", ee);
-			}
-		}
+        } catch (Exception e) {
+		    	// logger.error("Unknown error", e);
+    			// putResponse("error", "Unknown error");
 
-		// close streams
-		if (listFileStreams != null) {
-			for (ByteArrayOutputStream os : listFileStreams) {
-				try {
-					os.close();
-				} catch (Exception e) {}
-			}
-		}
+		    	// output the error
+		    	// try {
+				    // output(response, false, json, response.getWriter());
+    			// } catch (Exception ee) {
+		    		// logger.error("", ee);
+    			// }
+		    }
+
+    		// close streams
+		    if (listFileStreams != null) {
+    			for (ByteArrayOutputStream os : listFileStreams) {
+		    		try {
+				    	os.close();
+    				} catch (Exception e) {}
+		    	}
+    		}
+    } catch (Exception e) {}
 	}
 
 	protected static void output(HttpServletResponse response, boolean isResponseTextHtml, JSONObject json, PrintWriter responseWriter) {
@@ -204,8 +209,9 @@ public abstract class AbstractConnectorServlet extends HttpServlet {
 			try {
 				ServletFileUpload upload = new ServletFileUpload();
 				FileItemIterator iter = upload.getItemIterator(request);
-				while (iter.hasNext()) {
-					FileItemStream item = iter.next();
+				
+        while (iter.hasNext()) {
+        	FileItemStream item = iter.next();
 					String name = item.getFieldName();
 					InputStream stream = item.openStream();
 					if (item.isFormField()) {
@@ -282,15 +288,17 @@ public abstract class AbstractConnectorServlet extends HttpServlet {
 			}
 		}
 
-		command.setRequest(request);
-		command.setResponse(response);
-		command.setJson(json);
-		command.setRequestParameters(requestParams);
-		command.setListFiles(listFiles);
-		command.setListFileStreams(listFileStreams);
-		command.setConfig(config);
+    try {
+  		command.setRequest(request);
+  		command.setResponse(response);
+  		command.setJson(json);
+  		command.setRequestParameters(requestParams);
+  		command.setListFiles(listFiles);
+  		command.setListFileStreams(listFileStreams);
+  		command.setConfig(config);
 
-		command.init();
+  		command.init();
+    } catch (Exception e) {}
 
 		return command;
 	}

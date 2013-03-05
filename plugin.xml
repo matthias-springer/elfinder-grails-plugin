@@ -1,12 +1,10 @@
 <plugin name='elfinder' version='0.1' grailsVersion='2.1 &gt; *'>
-  <author>Your name</author>
+  <author>Matthias Springer</author>
   <title>Elfinder Plugin</title>
-  <description>Brief summary/description of the plugin.
-</description>
+  <description>This plugin wraps the elFinder servlet (https://github.com/Studio-42/elfinder-servlet-demo). It provides one single instance of that servlet!</description>
   <documentation>http://grails.org/plugin/elfinder</documentation>
   <type>ElfinderGrailsPlugin</type>
   <resources>
-    <resource>elfinder.HelloController</resource>
   </resources>
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />

@@ -1,5 +1,4 @@
-package my.demo;
-
+package org.elfinder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +32,9 @@ public class VirtualProxy extends HttpServlet {
 		// security
 		path = FilenameUtils.normalize(path);
 
-		File file = new File(MyDemoServlet.HOME_SHARED_DOCS, path);
+    System.out.println(ElfinderServlet.HOME_SHARED_DOCS + ",,," + path);
+
+		File file = new File(ElfinderServlet.HOME_SHARED_DOCS, path);
 		
 		
 		FileInputStream fileIn = new FileInputStream(file);

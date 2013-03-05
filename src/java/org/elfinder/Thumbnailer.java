@@ -1,5 +1,4 @@
-package my.demo;
-
+package org.elfinder;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -41,7 +40,7 @@ public class Thumbnailer extends HttpServlet {
 		
 		// security
 		path = FilenameUtils.normalize(path);
-		File f = new File(MyDemoServlet.HOME_SHARED_DOCS, path);
+		File f = new File(ElfinderServlet.HOME_SHARED_DOCS, path);
 		
 		Boolean real = request.getParameter("r") != null;
 		BufferedImage b = null;
