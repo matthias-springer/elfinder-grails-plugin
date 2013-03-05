@@ -32,8 +32,6 @@ public class VirtualProxy extends HttpServlet {
 		// security
 		path = FilenameUtils.normalize(path);
 
-    System.out.println(ElfinderServlet.HOME_SHARED_DOCS + ",,," + path);
-
 		File file = new File(ElfinderServlet.HOME_SHARED_DOCS, path);
 		
 		

@@ -53,25 +53,6 @@ public abstract class AbstractConnectorConfig {
 	public abstract String getRoot();
 
 	/**
-	 * Get URL of root directory.
-	 * @return
-	 */
-	public abstract String getRootUrl();
-
-	/**
-	 * Getting URL of a file.
-	 * @param file
-	 * @return
-	 */
-	public abstract String getFileUrl(File file);
-	
-	/**
-	 * Get URL of file thumnail.
-	 * @return
-	 */
-	public abstract String getThumbnailUrl(File path);
-	
-	/**
 	 * Returns true if there is a thumbnail to display for the file.
 	 * @return
 	 */

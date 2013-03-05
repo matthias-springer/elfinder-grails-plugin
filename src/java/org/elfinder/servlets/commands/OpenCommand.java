@@ -29,7 +29,7 @@ public class OpenCommand extends AbstractCommandOverride {
 			contentCommand();
 		}
 	}
-
+  
 	protected void serveFile(File fileTarget) throws ConnectorException {
 		//		if (filetype($file) == 'link') {
 		//				$file = $this->_readlink($file);
@@ -47,8 +47,8 @@ public class OpenCommand extends AbstractCommandOverride {
 		String disp = getMimeDisposition(mime);
 
 		getResponse().setContentType(mime);
-		String fileUrl = getFileUrl(fileTarget);
-		String fileUrlRelative = getFileUrl(fileTarget);
+		String fileUrl = getFileUrlPath(fileTarget);
+		String fileUrlRelative = getFileUrlPath(fileTarget);
 		getResponse().setHeader("Content-Disposition", disp + "; filename=" + fileUrl);
 		getResponse().setHeader("Content-Location", fileUrlRelative);
 		getResponse().setHeader("Content-Transfer-Encoding", "binary");

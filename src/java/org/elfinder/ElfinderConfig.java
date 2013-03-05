@@ -33,25 +33,10 @@ public class ElfinderConfig extends AbstractConnectorConfig {
 	public String getRoot() {
 		return ElfinderServlet.HOME_SHARED_DOCS;
 	}
-
-	@Override
-	public String getRootUrl() {
-		return ElfinderServlet.REALOBJECTURL;
-	}
 	
-	@Override
-	public String getFileUrl(File path) {
-		return getRootUrl() + "?p=" + getRelativePath(path);
-	}
-
 	@Override
 	public String rootAliasOrBaseName() {
 		return ElfinderServlet.SHARED_DOCS;
-	}
-	
-	@Override
-	public String getThumbnailUrl(File path) {
-		return ElfinderServlet.THUMBNAIL + getRelativePath(path);
 	}
 	
 	@Override

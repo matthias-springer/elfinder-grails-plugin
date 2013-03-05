@@ -1,7 +1,7 @@
 class ElfinderGrailsPlugin {
     def version = "0.1"
     def grailsVersion = "2.1 > *"
-    def dependsOn = [:]
+    def dependsOn = ["jquery": "* > 1.6.1"]
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
@@ -15,6 +15,22 @@ This plugin wraps the elFinder servlet (https://github.com/Studio-42/elfinder-se
 
     def doWithWebDescriptor = { xml ->
       //def grailsEnv = System.getProperty("grails.env")
+      
+      def filterElement = xml.'filter'
+      filterElement[filterElement.size()-1] + {
+        'filter' {
+          'filter-name'("upload")
+          'filter-class'("UploadFilter")
+        }
+      }
+
+      def filterMappingElement = xml.'filter-mapping'
+      filterMappingElement[filterMappingElement.size()-1] + {
+        'filter-mapping' {
+          'filter-name'("upload")
+          'url-pattern'("/elfinder/connector")
+        }
+      }
 
       def servletElement = xml.'servlet'
       servletElement[servletElement.size()-1] + {

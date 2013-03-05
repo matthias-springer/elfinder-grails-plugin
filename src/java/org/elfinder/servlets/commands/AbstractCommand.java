@@ -45,6 +45,7 @@ public abstract class AbstractCommand {
 	private PrintWriter out;
 	private boolean responseOutputDone = false;
 	private boolean forceRunInit = false;
+  private String baseURL;
 
 	public AbstractCommand() {
 	}
@@ -186,7 +187,21 @@ public abstract class AbstractCommand {
 		_content(path, isTree);
 	}
 
+  private String getThumbnailUrl(File path) {
+    return baseURL + "thumbnailer?p=" + config.getRelativePath(path);
+  }
+
+  private void setBaseURL() {
+    baseURL = request.getContextPath();
+    if (!baseURL.endsWith("/")) {
+      baseURL = baseURL + "/";
+    }
+    baseURL = baseURL + "elfinder/";
+  }
+
 	public void initCommand() throws ConnectorException {
+    setBaseURL();
+
 		putResponse("disabled", getConfig().getListDisabled());
 
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -194,7 +209,8 @@ public abstract class AbstractCommand {
 		params.put("uplMaxSize", getConfig().getUploadMaxSize() + "M");
 		params.put("archives", getConfig().getListArchives());
 		params.put("extract", getConfig().getListExtract());
-		params.put("url", getConfig().getRootUrl());
+		params.put("url", baseURL + "virtualproxy");
+
 		putResponse("params", params);
 	}
 
@@ -216,8 +232,9 @@ public abstract class AbstractCommand {
 		return disp;
 	}
 
-	protected String getFileUrl(File file) {
-		return config.getFileUrl(file);
+	public String getFileUrlPath(File file) {
+    setBaseURL();
+		return baseURL + "virtualproxy?p=" + config.getRelativePath(file);
 	}
 
 	protected String basename(File path) {
@@ -495,7 +512,6 @@ public abstract class AbstractCommand {
 		// } else {
 		// $d = date($this->_options['dateFormat'], $stat['mtime']);
 		// }
-
 		boolean isDir = path.isDirectory();
 		Map<String, Object> info = new HashMap<String, Object>();
 		info.put("name", encodeFileNameForOutput(basename(path)));
@@ -509,11 +525,11 @@ public abstract class AbstractCommand {
 
 		if (!isDir) {
 			if (config.isFileUrlEnabled() && true == (Boolean) info.get("read")) {
-				info.put("url", encodeFileNameForOutput(config.getFileUrl(path)));
+				info.put("url", encodeFileNameForOutput(getFileUrlPath(path)));
 			}
 			
 			if(config.hasThumbnail(path)) {
-				info.put("tmb", encodeFileNameForOutput(config.getThumbnailUrl(path)));
+				info.put("tmb", encodeFileNameForOutput(this.getThumbnailUrl(path)));
 			}
 
 			// if ($this->_options['fileURL'] && $info['read']) {

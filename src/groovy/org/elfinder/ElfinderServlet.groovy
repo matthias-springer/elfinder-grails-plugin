@@ -23,9 +23,7 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder;
 public class ElfinderServlet extends AbstractConnectorServlet {
 
 	public static String SHARED_DOCS = "Shared docs";
-	public static String THUMBNAIL = "/elfinder/elfinder/thumbnailer?p=";
 	public static String HOME_SHARED_DOCS = "/tmp/shared_docs";
-	public static String REALOBJECTURL = "/elfinder/elfinder/virtualproxy";
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -44,14 +42,8 @@ public class ElfinderServlet extends AbstractConnectorServlet {
       log.warn "No elfinder home directory specified. Using default value ${HOME_SHARED_DOCS}."
  		}
 	  
-    if (appConfig.elfinder?.thumbnail)
-		  THUMBNAIL = appConfig.elfinder.thumbnail;
-
     if (appConfig.elfinder?.sharedDocs)
 	  	SHARED_DOCS = appConfig.elfinder.sharedDocs;
-
-  	if (appConfig.elfinder?.realObjectURL)
-  	 	REALOBJECTURL = appConfig.elfinder.realObjectURL;
   }
 
 	@Override
