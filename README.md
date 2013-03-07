@@ -1,16 +1,17 @@
 elfinder-grails-plugin
 ======================
+This Grails plugin integrates elFinder (https://github.com/Studio-42/elFinder) by wrapping the existing elFinder servlets (https://github.com/Studio-42/elfinder-servlet).
 
 Installation
 ------------
 * Install the plugin
-* Use tag ```<g:elfinder />``` include elfinder.
+* Use tag ```<g:elfinder />``` to include elfinder.
 * In your ```Config.groovy```, specify the home directory, i.e. the directory accessible with elfinder: 
   ```elfinder.homeSharedDocs = "/tmp/shared"```
 
 Integrate with CKEditor
 -----------------------
-Use ```ckeditor``` attribute: ```<g:elfinder ckeditor="1" />```
+Use ```ckeditor``` attribute (e.g. ```<g:elfinder ckeditor="1" />```) and follow these instructions to configure CKEditor: https://github.com/Studio-42/elFinder/wiki/Integration-with-CKEditor
 
 Authentication / Authorization
 ------------------------------
@@ -42,4 +43,6 @@ elfinder.authentication = new org.elfinder.ServletAuthentication() {
 }
 ```
 
-
+What it looks like
+------------------
+![alt text](https://raw.github.com/matthias-springer/elfinder-grails-plugin/master/example.png "Example")
