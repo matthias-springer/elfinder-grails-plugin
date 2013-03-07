@@ -1,7 +1,6 @@
 class ElfinderGrailsPlugin {
     def version = "0.1"
     def grailsVersion = "2.1 > *"
-    def dependsOn = ["jquery": "* > 1.6.1"]
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]

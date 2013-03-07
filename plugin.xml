@@ -1,6 +1,6 @@
 <plugin name='elfinder' version='0.1' grailsVersion='2.1 &gt; *'>
   <author>Matthias Springer</author>
-  <title>Elfinder Plugin</title>
+  <title>elFinder Grails Servlet Plugin</title>
   <description>This plugin wraps the elFinder servlet (https://github.com/Studio-42/elfinder-servlet-demo). It provides one single instance of that servlet!</description>
   <documentation>http://grails.org/plugin/elfinder</documentation>
   <type>ElfinderGrailsPlugin</type>
