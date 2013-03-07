@@ -34,13 +34,13 @@ import org.json.JSONObject;
 public abstract class AbstractCommand {
 	private static Logger logger = Logger.getLogger(AbstractCommand.class);
 
-	private HttpServletRequest request;
-	private HttpServletResponse response;
+	protected HttpServletRequest request;
+	protected HttpServletResponse response;
 	private JSONObject json;
 	private Map<String, Object> requestParameters;
 	private List<FileItemStream> listFiles;
 	private List<ByteArrayOutputStream> listFileStreams;
-	private AbstractConnectorConfig config;
+	protected AbstractConnectorConfig config;
 	private boolean isResponseTextHtml = false;
 	private PrintWriter out;
 	private boolean responseOutputDone = false;

@@ -24,6 +24,14 @@ public class ElfinderServlet extends AbstractConnectorServlet {
 
 	public static String SHARED_DOCS = "Shared docs";
 	public static String HOME_SHARED_DOCS = "/tmp/shared_docs";
+  
+  public static ServletAuthentication AUTHENTICATION = new ServletAuthentication() {
+    @Override
+    public boolean isAllowed(HttpServletRequest request) {
+      // default: no access control
+      return true; 
+    }
+  };
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -44,6 +52,10 @@ public class ElfinderServlet extends AbstractConnectorServlet {
 	  
     if (appConfig.elfinder?.sharedDocs)
 	  	SHARED_DOCS = appConfig.elfinder.sharedDocs;
+
+    if (appConfig.elfinder?.authentication)
+      AUTHENTICATION = appConfig.elfinder.authentication
+
   }
 
 	@Override

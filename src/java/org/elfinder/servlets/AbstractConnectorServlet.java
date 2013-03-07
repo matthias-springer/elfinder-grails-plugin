@@ -125,6 +125,11 @@ public abstract class AbstractConnectorServlet extends HttpServlet {
 			if (config == null) {
 				throw new Exception("Configuration problem");
 			}
+      
+      if (!config.getAuthenticator().isAllowed(request)) {
+        putResponse("error", "Access denied.");
+        output(response, false, json, response.getWriter());
+      }
 
       try {
     			// prepare command and run

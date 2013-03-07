@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
 
+import org.elfinder.ServletAuthentication;
 import org.elfinder.servlets.FileActionEnum;
 import org.elfinder.servlets.fs.IFsImpl;
 
@@ -51,6 +52,11 @@ public abstract class AbstractConnectorConfig {
 	 * @return
 	 */
 	public abstract String getRoot();
+
+  /**
+   * Get the authenticator for access control.
+   */
+  public abstract ServletAuthentication getAuthenticator();
 
 	/**
 	 * Returns true if there is a thumbnail to display for the file.

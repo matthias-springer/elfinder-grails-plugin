@@ -33,7 +33,12 @@ public class ElfinderConfig extends AbstractConnectorConfig {
 	public String getRoot() {
 		return ElfinderServlet.HOME_SHARED_DOCS;
 	}
-	
+
+  @Override
+  public ServletAuthentication getAuthenticator() {
+    return ElfinderServlet.AUTHENTICATION;  	
+  }
+
 	@Override
 	public String rootAliasOrBaseName() {
 		return ElfinderServlet.SHARED_DOCS;
