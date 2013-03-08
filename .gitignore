@@ -1,4 +1,5 @@
 target/
-target/*
 *.log
-
+plugin.xml
+.settings
+grails-elfinder-*.zip

@@ -1,16 +1,16 @@
 class ElfinderGrailsPlugin {
     def version = "0.1"
-    def grailsVersion = "2.1 > *"
+    def grailsVersion = "2.0 > *"
     def pluginExcludes = [
-        "grails-app/views/error.gsp"
+        "grails-app/controllers/**",
+        "grails-app/views/**",
+        "src/templates/**"
     ]
 
     def title = "elFinder Grails Servlet Plugin"
     def author = "Matthias Springer"
     def authorEmail = "me@matthiasspringer.de"
-    def description = '''\
-This plugin wraps the elFinder servlet (https://github.com/Studio-42/elfinder-servlet-demo). It provides one single instance of that servlet!
-'''
+    def description = 'Wraps the elFinder servlet (https://github.com/Studio-42/elfinder-servlet-demo). It provides one single instance of that servlet!'
 
     def doWithWebDescriptor = { xml ->
       //def grailsEnv = System.getProperty("grails.env")
@@ -75,23 +75,5 @@ This plugin wraps the elFinder servlet (https://github.com/Studio-42/elfinder-se
         }
       }
       
-    }
-
-    def doWithSpring = {
-    }
-
-    def doWithDynamicMethods = { ctx ->
-    }
-
-    def doWithApplicationContext = { applicationContext ->
-    }
-
-    def onChange = { event ->
-    }
-
-    def onConfigChange = { event ->
-    }
-
-    def onShutdown = { event ->
     }
 }
