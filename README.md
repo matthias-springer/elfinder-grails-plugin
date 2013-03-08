@@ -6,7 +6,7 @@ Installation
 ------------
 * Install the plugin
 * Use tag ```<g:elfinder />``` to include elfinder.
-* In your ```Config.groovy```, specify the home directory, i.e. the directory accessible with elfinder: 
+* In your ```Config.groovy```, specify the home directory, i.e. the directory accessible with elfinder:
   ```elfinder.homeSharedDocs = "/tmp/shared"```
 
 Integrate with CKEditor
@@ -22,20 +22,18 @@ In your ```Config.groovy```, set ```elfinder.authentication```. It must implemen
 Here is an example how to integrate Spring Security.
 ```groovy
 // Integration of Spring Security Core in elfinder servlets
+import org.springframework.security.core.context.SecurityContextHolder
+
 elfinder.authentication = new org.elfinder.ServletAuthentication() {
 
   private final static String SECURITY_ROLE = 'ROLE_ADMIN'
 
   @Override
   public boolean isAllowed(HttpServletRequest request) {
-    def ctx = SCH.servletContext.getAttribute(GA.APPLICATION_CONTEXT)
-    def sessionId =  request.cookies.find({cookie -> cookie.name == "JSESSIONID"}).value
-
     try {
-      return ctx.sessionRegistry.getSessionInformation(sessionId).getPrincipal().getAuthorities().find({auth -> auth.getAuthority() == SECURITY_ROLE}) != null
+      SecurityContextHolder.context.authentication.principal.authorities.find({auth -> auth.authority == SECURITY_ROLE})
     }
-    catch (Exception e)
-    {
+    catch (Exception e) {
       // invalid session cookie provided
       return false
     }

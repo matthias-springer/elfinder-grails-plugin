@@ -14,7 +14,7 @@ class ElfinderTagLib {
     if (attrs.lang && attrs.lang != "en") {
       out << g.javascript(src: "elfinder/i18n/elfinder.${attrs.lang}.js")
     }
-    
+
     out << """<div id="elfinder">Loading file browser...</div>"""
 
     if (attrs.ckeditor) {
@@ -23,7 +23,7 @@ class ElfinderTagLib {
     function getUrlParam(paramName) {
         var reParam = new RegExp('(?:[\\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
         var match = window.location.search.match(reParam) ;
-        
+
         return (match && match.length > 1) ? match[1] : '' ;
     }
 
